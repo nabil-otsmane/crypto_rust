@@ -13,4 +13,5 @@ block = {path = "./block"}
 
 members = [
     "block",
+    "utils"
 ]

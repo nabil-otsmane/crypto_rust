@@ -2,8 +2,8 @@ mod aes;
 
 pub use aes::AES;
 
-mod utils;
-pub use utils::*;
+mod paddings;
+pub use paddings::*;
 
 mod mode;
 
