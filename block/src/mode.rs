@@ -1,4 +1,4 @@
-use crate::AES;
+use crate::{AES, pkcs7};
 
 pub enum Mode {
     Ecb,
@@ -7,9 +7,11 @@ pub enum Mode {
 
 impl Mode {
     pub fn encrypt(self, aes: AES, plain: &[u8]) -> Vec<u8> {
-        if plain.len() % 16 != 0 {
-            panic!("padding not yet implemented!");
-        }
+        let plain = if plain.len() % 16 != 0 {
+            pkcs7(plain, 16)
+        } else {
+            plain.to_vec()
+        };
         let mut crypt = vec![];
         match self {
             Self::Ecb => {
